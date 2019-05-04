@@ -50,9 +50,9 @@
 
 .uploadBtn {
   background-color: transparent;
-  border: none;
-  width: 100px;
-  height: 85px;
+  /* border: none; */
+  width: 200px;
+  height: 200px;
 }
 
 /* .uploadIcon {
