@@ -17,9 +17,52 @@
   color: #61dafb;
 }
 
+.fileitem:active {
+  background-color: white !important;
+}
+.fileitem:hover {
+  background-color: white !important;
+}
+
+.downloadBtn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 60px;
+}
+
+.downloadIcon {
+  width: 30px;
+  height: 25px;
+}
+
+.deleteBtn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 20px;
+}
+
+.deleteIcon {
+  width: 30px;
+  height: 25px;
+}
+
+.uploadBtn {
+  background-color: transparent;
+  border: none;
+  width: 100px;
+  height: 85px;
+}
+
+/* .uploadIcon {
+  width: 100px;
+  height: 85px;
+} */
+
 #lizard-logo {
-  max-height: 150px;
-  max-width: 200px;
+  max-height: 300px;
+  max-width: 150px;
   -webkit-animation:spin 4s linear infinite;
   -moz-animation:spin 4s linear infinite;
   animation:spin 4s linear infinite;
