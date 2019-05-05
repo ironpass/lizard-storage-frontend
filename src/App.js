@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 import logo from './static/lizard.svg';
-import trash from './static/trash.svg';
 import upload from './static/upload.svg';
 import download  from './static/download.svg';
+
+import {downloadFile, uploadFile, deleteFile} from './FileManager.js'
+import ConfirmDeleteButton from './ConfirmDeleteButton.js'
 
 class App extends React.Component {
   constructor() {
@@ -19,7 +21,7 @@ class App extends React.Component {
     }
   }
 
-  updateState() {
+  updateFileState() {
     axios.get('http://localhost:7777/showall').then((res) => {
       this.setState({files: res.data.map(
         (file)=> ({
@@ -32,64 +34,28 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.updateState()   
+    this.updateFileState()   
   }
-  
+
   componentDidUpdate() {
-    this.updateState()
-  }
-  
-  downloadFile(file) {
-    axios({
-      url: 'http://localhost:7777/download?id='+file.id,
-      method: 'GET',
-      responseType: 'blob',
-    }).then((res) => {
-      const url = window.URL.createObjectURL(new Blob([res.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', file.name);
-      document.body.appendChild(link);
-      link.click();
-    });
-  }
-
-  uploadFile(form) {
-    const url = 'http://localhost:7777/upload';
-    const formData = new FormData();
-    formData.append('uploadingfile', form.file)
-    formData.append('name', form.name)
-    const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    }
-    axios.post(url, formData, config).then((res) => {
-      alert(res.data)
-    })
-    
-  }
-
-  deleteFile(file) {
-    axios.get('http://localhost:7777/delete?id='+file.id)
+    this.updateFileState()
   }
 
   onChange(e) {
-    this.uploadingFile = {file: e.target.files[0], name:e.target.files[0].name}
+    if(e.target.files[0])
+      this.uploadingFile = {file: e.target.files[0], name:e.target.files[0].name}
   }
 
   generateList(fileList) {
     return (
         fileList.map((file)=>
-        <div className='d-flex'>
+        <div key={file.id} className='d-flex'>
           <ListGroupItem action className='fileitem'>
             {file.name}
-            <button className='downloadBtn' type='submit' onClick={()=>this.downloadFile(file)}>
+            <Button className='downloadBtn' type='submit' onClick={()=>downloadFile(file)}>
               <img className='downloadIcon' src={download} alt='download icon'/>
-            </button>
-            <button className='deleteBtn' type='submit' onClick={()=>this.deleteFile(file)}>
-              <img className='deleteIcon' src={trash} alt='delete icon'/>
-            </button>
+            </Button>
+            <ConfirmDeleteButton id={file.id} file={file} deleteFile={deleteFile}/>
           </ListGroupItem>
         </div>)
     )
@@ -103,14 +69,14 @@ class App extends React.Component {
           <p id='project-name'>LIZARD STORAGE PROJECT</p>  
         </div>
 
-        <div className='Files'>
+        <div className='FileDisplay'>
           <ListGroup id="filelist">
             {this.generateList(this.state.files)}
           </ListGroup>
         </div>
 
-        <div style={{textAlign:'center'}}>
-          <form encType='multipart/form-data' onSubmit={()=>this.uploadFile(this.uploadingFile)}>
+        <div className='UploadForm' style={{textAlign:'center'}}>
+          <form encType='multipart/form-data' onSubmit={()=>uploadFile(this.uploadingFile)}>
             <input type='file' name='uploadingfile' onChange={(e)=>this.onChange(e)}/>
             <input className='uploadBtn' src={upload} type='image' alt='upload icon' />
           </form>

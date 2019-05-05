@@ -25,10 +25,14 @@
 }
 
 .downloadBtn {
-  background-color: transparent;
-  border: none;
+  background-color: transparent !important;
   position: absolute;
-  right: 60px;
+  bottom: 5px;
+  right: 80px;
+}
+
+.downloadBtn:active {
+  background-color: lightgreen !important;
 }
 
 .downloadIcon {
@@ -37,12 +41,15 @@
 }
 
 .deleteBtn {
-  background-color: transparent;
-  border: none;
+  background-color: transparent !important;
   position: absolute;
   right: 20px;
+  bottom: 5px;
 }
 
+.deleteBtn:active {
+  background-color: lightcoral !important;
+}
 .deleteIcon {
   width: 30px;
   height: 25px;
