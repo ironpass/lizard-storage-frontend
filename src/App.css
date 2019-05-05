@@ -2,66 +2,6 @@
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.fileitem:active {
-  background-color: white !important;
-}
-.fileitem:hover {
-  background-color: white !important;
-}
-
-.downloadBtn {
-  background-color: transparent !important;
-  position: absolute;
-  bottom: 5px;
-  right: 80px;
-}
-
-.downloadBtn:active {
-  background-color: lightgreen !important;
-}
-
-.downloadIcon {
-  width: 30px;
-  height: 25px;
-}
-
-.deleteBtn {
-  background-color: transparent !important;
-  position: absolute;
-  right: 20px;
-  bottom: 5px;
-}
-
-.deleteBtn:active {
-  background-color: lightcoral !important;
-}
-.deleteIcon {
-  width: 30px;
-  height: 25px;
-}
-
-.uploadBtn {
-  background-color: transparent;
-  /* border: none; */
-  width: 200px;
-  height: 200px;
-}
-
 #lizard-logo {
   max-height: 300px;
   max-width: 150px;
@@ -81,11 +21,73 @@
   text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.fileitem:active {
+  background-color: white !important;
+}
+.fileitem:hover {
+  background-color: white !important;
+}
+
+.downloadBtn {
+  background-color: transparent !important;
+  position: absolute;
+  bottom: 2px;
+  right: 80px;
+}
+.downloadBtn:hover {
+  background-color: lightgreen !important;
+}
+.downloadBtn:active {
+  background-color: green !important;
+}
+.downloadIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.deleteBtn {
+  background-color: transparent !important;
+  position: absolute;
+  right: 20px;
+  bottom: 2px;
+}
+.deleteBtn:hover {
+  background-color: lightcoral !important;
+}
+.deleteBtn:active {
+  background-color: red !important;
+}
+.deleteIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.uploadBtn {
+  padding: 10px;
+  background-color: white;
+  transition: background 0.1s linear;
+  border-radius: 10px;
+  border: 2px solid grey;
+  width: 100px;
+  height: 100px;
+}
+.uploadBtn:hover {
+  background-color: lightblue;
+}
+.uploadBtn:active {
+  background-color: steelblue;
+}
+
+.UploadForm {
+  margin: 5px;
+  height: 50%;
+  padding: 15px;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: lightgrey;
+}
+
+.FileDisplay {
+  height: 240px;
+  overflow: auto;
 }

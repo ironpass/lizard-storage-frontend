@@ -75,9 +75,9 @@ class App extends React.Component {
           </ListGroup>
         </div>
 
-        <div className='UploadForm' style={{textAlign:'center'}}>
+        <div className='UploadForm'>
           <form encType='multipart/form-data' onSubmit={()=>uploadFile(this.uploadingFile)}>
-            <input type='file' name='uploadingfile' onChange={(e)=>this.onChange(e)}/>
+            <input className='selectFile' type='file' name='uploadingfile' onChange={(e)=>this.onChange(e)}/>
             <input className='uploadBtn' src={upload} type='image' alt='upload icon' />
           </form>
         </div>
