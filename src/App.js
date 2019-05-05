@@ -13,9 +13,13 @@ class App extends React.Component {
     this.state = {
       files: [],
     }
+    this.uploadingFile = {
+      file: null,
+      name: '',
+    }
   }
 
-  componentDidMount() {
+  updateState() {
     axios.get('http://localhost:7777/showall').then((res) => {
       this.setState({files: res.data.map(
         (file)=> ({
@@ -24,14 +28,22 @@ class App extends React.Component {
           })
         )
       })
-    })   
+    })
+  }
+
+  componentDidMount() {
+    this.updateState()   
+  }
+  
+  componentDidUpdate() {
+    this.updateState()
   }
   
   downloadFile(file) {
     axios({
       url: 'http://localhost:7777/download?id='+file.id,
       method: 'GET',
-      responseType: 'blob', // important
+      responseType: 'blob',
     }).then((res) => {
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement('a');
@@ -40,6 +52,30 @@ class App extends React.Component {
       document.body.appendChild(link);
       link.click();
     });
+  }
+
+  uploadFile(form) {
+    const url = 'http://localhost:7777/upload';
+    const formData = new FormData();
+    formData.append('uploadingfile', form.file)
+    formData.append('name', form.name)
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    }
+    axios.post(url, formData, config).then((res) => {
+      alert(res.data)
+    })
+    
+  }
+
+  deleteFile(file) {
+    axios.get('http://localhost:7777/delete?id='+file.id)
+  }
+
+  onChange(e) {
+    this.uploadingFile = {file: e.target.files[0], name:e.target.files[0].name}
   }
 
   generateList(fileList) {
@@ -51,8 +87,8 @@ class App extends React.Component {
             <button className='downloadBtn' type='submit' onClick={()=>this.downloadFile(file)}>
               <img className='downloadIcon' src={download} alt='download icon'/>
             </button>
-            <button className='deleteBtn' type='submit' onClick={()=>(alert("nigga"))}>
-              <img classNme='deleteIcon' src={trash} alt='delete icon'/>
+            <button className='deleteBtn' type='submit' onClick={()=>this.deleteFile(file)}>
+              <img className='deleteIcon' src={trash} alt='delete icon'/>
             </button>
           </ListGroupItem>
         </div>)
@@ -74,9 +110,10 @@ class App extends React.Component {
         </div>
 
         <div style={{textAlign:'center'}}>
-          <button className='uploadBtn' type='submit' onClick={()=>alert('numen')}>
-            <img id='uploadIcon' src={upload} alt='upload icon'/>
-          </button>
+          <form encType='multipart/form-data' onSubmit={()=>this.uploadFile(this.uploadingFile)}>
+            <input type='file' name='uploadingfile' onChange={(e)=>this.onChange(e)}/>
+            <input className='uploadBtn' src={upload} type='image' alt='upload icon' />
+          </form>
         </div>
       </div>
     )
