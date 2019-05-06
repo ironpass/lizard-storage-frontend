@@ -6,6 +6,7 @@ class ConfirmDeleteButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      endpoint: props.endpoint,
       modal: false,
       file: props.file,
     };
@@ -21,7 +22,7 @@ class ConfirmDeleteButton extends React.Component {
 
   deleteAndToggle(file) {
     this.toggle()
-    this.deleteFile(file)
+    this.deleteFile(this.state.endpoint, file)
   }
 
   render() {

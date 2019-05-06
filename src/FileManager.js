@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export function downloadFile(file) {
+export function downloadFile(endpoint, file) {
     axios({
-      url: 'http://localhost:7777/download?id='+file.id,
+      url: endpoint+'/download?id='+file.id,
       method: 'GET',
       responseType: 'blob',
     }).then((res) => {
@@ -15,8 +15,8 @@ export function downloadFile(file) {
     });
 }
 
-export function uploadFile(form) {
-    const url = 'http://localhost:7777/upload';
+export function uploadFile(endpoint, form) {
+    const url = endpoint+'/upload';
     const formData = new FormData();
     formData.append('uploadingfile', form.file)
     formData.append('name', form.name)
@@ -28,6 +28,6 @@ export function uploadFile(form) {
     axios.post(url, formData, config)
 }
 
-export function deleteFile(file) {
-    axios.get('http://localhost:7777/delete?id='+file.id)
+export function deleteFile(endpoint, file) {
+    axios.get(endpoint+'/delete?id='+file.id)
 }

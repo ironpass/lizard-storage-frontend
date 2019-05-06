@@ -12,6 +12,7 @@ import ConfirmDeleteButton from './ConfirmDeleteButton.js'
 class App extends React.Component {
   constructor() {
     super()
+    this.production_url = 'https://lizard-storage-backend.herokuapp.com'
     this.state = {
       files: [],
     }
@@ -20,9 +21,9 @@ class App extends React.Component {
       name: '',
     }
   }
-
+  
   updateFileState() {
-    axios.get('http://localhost:7777/showall').then((res) => {
+    axios.get(this.production_url+'/showall').then((res) => {
       this.setState({files: res.data.map(
         (file)=> ({
           "name":file.filename,
@@ -52,10 +53,10 @@ class App extends React.Component {
         <div key={file.id} className='d-flex'>
           <ListGroupItem action className='fileitem'>
             {file.name}
-            <Button className='downloadBtn' type='submit' onClick={()=>downloadFile(file)}>
+            <Button className='downloadBtn' type='submit' onClick={()=>downloadFile(this.production_url, file)}>
               <img className='downloadIcon' src={download} alt='download icon'/>
             </Button>
-            <ConfirmDeleteButton id={file.id} file={file} deleteFile={deleteFile}/>
+            <ConfirmDeleteButton id={file.id} endpoint={this.production_url} file={file} deleteFile={deleteFile}/>
           </ListGroupItem>
         </div>)
     )
@@ -76,7 +77,7 @@ class App extends React.Component {
         </div>
 
         <div className='UploadForm'>
-          <form encType='multipart/form-data' onSubmit={()=>uploadFile(this.uploadingFile)}>
+          <form encType='multipart/form-data' onSubmit={()=>uploadFile(this.production_url, this.uploadingFile)}>
             <input className='selectFile' type='file' name='uploadingfile' onChange={(e)=>this.onChange(e)}/>
             <input className='uploadBtn' src={upload} type='image' alt='upload icon' />
           </form>
