@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/lizard-storage/static/css/main.097c1d4f.chunk.css",
+    "main.js": "/lizard-storage/static/js/main.3011b002.chunk.js",
+    "main.js.map": "/lizard-storage/static/js/main.3011b002.chunk.js.map",
+    "runtime~main.js": "/lizard-storage/static/js/runtime~main.912a2b08.js",
+    "runtime~main.js.map": "/lizard-storage/static/js/runtime~main.912a2b08.js.map",
+    "static/css/2.266e55a5.chunk.css": "/lizard-storage/static/css/2.266e55a5.chunk.css",
+    "static/js/2.029572fa.chunk.js": "/lizard-storage/static/js/2.029572fa.chunk.js",
+    "static/js/2.029572fa.chunk.js.map": "/lizard-storage/static/js/2.029572fa.chunk.js.map",
+    "index.html": "/lizard-storage/index.html",
+    "precache-manifest.09f5aa2eb84f2d657d20ec359d69ce68.js": "/lizard-storage/precache-manifest.09f5aa2eb84f2d657d20ec359d69ce68.js",
+    "service-worker.js": "/lizard-storage/service-worker.js",
+    "static/css/2.266e55a5.chunk.css.map": "/lizard-storage/static/css/2.266e55a5.chunk.css.map",
+    "static/css/main.097c1d4f.chunk.css.map": "/lizard-storage/static/css/main.097c1d4f.chunk.css.map",
+    "static/media/download.svg": "/lizard-storage/static/media/download.b3aa4b4b.svg",
+    "static/media/lizard.svg": "/lizard-storage/static/media/lizard.d56c869e.svg",
+    "static/media/trash.svg": "/lizard-storage/static/media/trash.5bd80917.svg",
+    "static/media/upload.svg": "/lizard-storage/static/media/upload.893e3b65.svg"
+  }
+}
