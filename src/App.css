@@ -91,3 +91,8 @@
   height: 240px;
   overflow: auto;
 }
+
+#filelist {
+  display: block !important;
+  text-align:center !important;
+}

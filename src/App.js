@@ -6,6 +6,8 @@ import logo from './static/lizard.svg';
 import upload from './static/upload.svg';
 import download  from './static/download.svg';
 
+import { RotateLoader } from 'react-spinners';
+
 import {downloadFile, uploadFile, deleteFile} from './FileManager.js'
 import ConfirmDeleteButton from './ConfirmDeleteButton.js'
 
@@ -15,6 +17,7 @@ class App extends React.Component {
     this.production_url = 'https://lizard-storage-backend.herokuapp.com'
     this.state = {
       files: [],
+      displaySpinner: true,
     }
     this.uploadingFile = {
       file: null,
@@ -24,7 +27,9 @@ class App extends React.Component {
   
   updateFileState() {
     axios.get(this.production_url+'/showall').then((res) => {
-      this.setState({files: res.data.map(
+      this.setState({
+        displaySpinner: false,
+        files: res.data.map(
         (file)=> ({
           "name":file.filename,
           "id":file._id
@@ -48,17 +53,16 @@ class App extends React.Component {
   }
 
   generateList(fileList) {
-    return (
-        fileList.map((file)=>
-        <div key={file.id} className='d-flex'>
-          <ListGroupItem action className='fileitem'>
-            {file.name}
-            <Button className='downloadBtn' type='submit' onClick={()=>downloadFile(this.production_url, file)}>
-              <img className='downloadIcon' src={download} alt='download icon'/>
-            </Button>
-            <ConfirmDeleteButton id={file.id} endpoint={this.production_url} file={file} deleteFile={deleteFile}/>
-          </ListGroupItem>
-        </div>)
+    return ( fileList.map((file)=>
+      <div key={file.id} className='d-flex'>
+        <ListGroupItem action className='fileitem'>
+          {file.name}
+          <Button className='downloadBtn' type='submit' onClick={()=>downloadFile(this.production_url, file)}>
+            <img className='downloadIcon' src={download} alt='download icon'/>
+          </Button>
+          <ConfirmDeleteButton id={file.id} endpoint={this.production_url} file={file} deleteFile={deleteFile}/>
+        </ListGroupItem>
+      </div>)
     )
   }
 
@@ -72,6 +76,7 @@ class App extends React.Component {
 
         <div className='FileDisplay'>
           <ListGroup id="filelist">
+            <RotateLoader loading={this.state.displaySpinner} size={20} sizeUnit={'px'} css={{margin:'80px !important'}}/>
             {this.generateList(this.state.files)}
           </ListGroup>
         </div>
